@@ -1,5 +1,10 @@
 'use strict';
-const { getFile, upload, processUpdate } = require('./storageBot.controller');
+const {
+  getFile,
+  upload,
+  processUpdate,
+  getProxy,
+} = require('./storageBot.controller');
 const { password, prefix } = require('./../../config').storageBot;
 module.exports = Router => {
   const router = new Router({
@@ -9,7 +14,7 @@ module.exports = Router => {
     .get('/:fileId/:filename', getFile)
     .post(`/${password}`, processUpdate)
     .post('/', upload)
-    .get('/proxy/:fileId', getFile);
+    .get('/proxy/:fileId', getProxy);
 
   return router;
 };
