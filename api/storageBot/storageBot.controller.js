@@ -13,7 +13,9 @@ exports.upload = async ctx => {
         config.storageChat,
         file.buffer,
         {},
-        { filename: `${filename || file.originalname}` },
+        {
+          filename: `${filename || file.originalname}`,
+        },
       )
       .then(res => {
         ctx.body = `${config.fileLink}/${res.document.file_id}/${filename ||
@@ -27,7 +29,15 @@ exports.upload = async ctx => {
 
 exports.getFile = async ctx => {
   const { fileId } = ctx.params;
+
   ctx.body = bot.getFileStream(fileId);
+};
+
+exports.getProxy = async ctx => {
+  const { fileId } = ctx.params;
+
+  const fileLink = bot.getFileLink(fileId);
+  ctx.redirect(fileLink);
 };
 
 exports.processUpdate = async ctx => {

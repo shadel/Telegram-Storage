@@ -8,7 +8,8 @@ module.exports = Router => {
   router
     .get('/:fileId/:filename', getFile)
     .post(`/${password}`, processUpdate)
-    .post('/', upload);
+    .post('/', upload)
+    .get('/proxy/:fileId', getFile);
 
   return router;
 };
