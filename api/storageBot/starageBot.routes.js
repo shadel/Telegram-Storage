@@ -11,10 +11,10 @@ module.exports = Router => {
     prefix: `/${prefix}`,
   });
   router
+    .get('/proxy/:fileId', getProxy)
     .get('/:fileId/:filename', getFile)
     .post(`/${password}`, processUpdate)
-    .post('/', upload)
-    .get('/proxy/:fileId', getProxy);
+    .post('/', upload);
 
   return router;
 };
