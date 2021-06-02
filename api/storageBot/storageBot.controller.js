@@ -36,7 +36,7 @@ exports.getFile = async ctx => {
 exports.getProxy = async ctx => {
   const { fileId } = ctx.params;
 
-  const fileLink = bot.getFileLink(fileId);
+  const fileLink = await bot.getFileLink(fileId);
   ctx.redirect(fileLink);
 };
 
