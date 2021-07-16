@@ -50,22 +50,25 @@ exports.processUpdate = async ctx => {
 bot.on('message', async mes => {
   console.log(mes.document);
   if (mes.text && mes.text.match('/')) return;
-  if (mes.document)
+  if (mes.document) {
     await bot.sendMessage(
       mes.chat.id,
       `${config.fileLink}/${mes.document.file_id}/${mes.document.file_name}`,
     );
-  else if (mes.photo)
-    await bot.sendMessage(
-      mes.chat.id,
-      `${config.fileLink}/${mes.photo.file_id}/${mes.photo.file_name}`,
+  } else if (mes.photo) {
+    const resMes = mes.photo.map(
+      photo =>
+        `${photo.width}x${photo.width}: ${config.fileLink}/${photo.file_id}/${
+          photo.file_name
+        }`,
     );
-  else if (mes.video)
+    await bot.sendMessage(mes.chat.id, resMes.join(', '));
+  } else if (mes.video) {
     await bot.sendMessage(
       mes.chat.id,
       `${config.fileLink}/${mes.video.file_id}/${mes.video.file_name}`,
     );
-  else {
+  } else {
     await bot.sendMessage(
       mes.chat.id,
       `Sorry, i don't see the file.
