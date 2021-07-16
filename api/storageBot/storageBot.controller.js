@@ -55,11 +55,22 @@ bot.on('message', async mes => {
       mes.chat.id,
       `${config.fileLink}/${mes.document.file_id}/${mes.document.file_name}`,
     );
-  else
+  else if (mes.photo)
+    await bot.sendMessage(
+      mes.chat.id,
+      `${config.fileLink}/${mes.photo.file_id}/${mes.photo.file_name}`,
+    );
+  else if (mes.video)
+    await bot.sendMessage(
+      mes.chat.id,
+      `${config.fileLink}/${mes.video.file_id}/${mes.video.file_name}`,
+    );
+  else {
     await bot.sendMessage(
       mes.chat.id,
       `Sorry, i don't see the file.
 It seems you didn't understand what I needed.
 Use the /help command to not feel like an ass🏳️‍🌈`,
     );
+  }
 });
